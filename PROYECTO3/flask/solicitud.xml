@@ -1,0 +1,213 @@
+<SOLICITUD_AUTORIZACION>
+
+    <DTE>
+
+        <TIEMPO>Guatemala, 15/01/2021 15:25 hrs. </TIEMPO>
+
+        <REFERENCIA>A1990</REFERENCIA>
+
+        <NIT_EMISOR>737810k</NIT_EMISOR>
+
+        <NIT_RECEPTOR>737810k</NIT_RECEPTOR>
+
+        <VALOR>100.00</VALOR>
+
+        <IVA>12.00</IVA>
+
+        <TOTAL>112.00</TOTAL>
+
+    </DTE>
+
+    <DTE>
+
+        <TIEMPO>Guatemala, 15/01/2021 13:05 hrs. </TIEMPO>
+
+        <REFERENCIA>AB990</REFERENCIA>
+
+        <NIT_EMISOR>6277757</NIT_EMISOR>
+
+        <NIT_RECEPTOR>4556870</NIT_RECEPTOR>
+
+        <VALOR>100.00</VALOR>
+
+        <IVA>12.00</IVA>
+
+        <TOTAL>112.00</TOTAL>
+
+    </DTE>
+
+    <DTE>
+
+        <TIEMPO>Guatemala, 18/10/2021 23:15 hrs. </TIEMPO>
+
+        <REFERENCIA>ABC90</REFERENCIA>
+
+        <NIT_EMISOR>5698567</NIT_EMISOR>
+
+        <NIT_RECEPTOR>7895654</NIT_RECEPTOR>
+
+        <VALOR>100.00</VALOR>
+
+        <IVA>12.00</IVA>
+
+        <TOTAL>112.00</TOTAL>
+
+    </DTE>
+    <DTE>
+
+        <TIEMPO>Guatemala, 15/01/2021 15:25 hrs. </TIEMPO>
+
+        <REFERENCIA>A1990</REFERENCIA>
+
+        <NIT_EMISOR>737810k</NIT_EMISOR>
+
+        <NIT_RECEPTOR>737810k</NIT_RECEPTOR>
+
+        <VALOR>100.00</VALOR>
+
+        <IVA>12.00</IVA>
+
+        <TOTAL>112.00</TOTAL>
+
+    </DTE>
+    <DTE>
+
+        <TIEMPO>Guatemala, 15/01/2021 15:25 hrs. </TIEMPO>
+
+        <REFERENCIA>A1990</REFERENCIA>
+
+        <NIT_EMISOR>737810k</NIT_EMISOR>
+
+        <NIT_RECEPTOR>737810k</NIT_RECEPTOR>
+
+        <VALOR>100.00</VALOR>
+
+        <IVA>12.00</IVA>
+
+        <TOTAL>112.00</TOTAL>
+
+    </DTE>
+    <DTE>
+
+        <TIEMPO>Guatemala, 15/01/2021 15:25 hrs. </TIEMPO>
+
+        <REFERENCIA>A1990</REFERENCIA>
+
+        <NIT_EMISOR>737810k</NIT_EMISOR>
+
+        <NIT_RECEPTOR>737810k</NIT_RECEPTOR>
+
+        <VALOR>100.00</VALOR>
+
+        <IVA>12.00</IVA>
+
+        <TOTAL>112.00</TOTAL>
+
+    </DTE>
+
+    <DTE>
+
+        <TIEMPO>Guatemala, 15/01/2021 13:05 hrs. </TIEMPO>
+
+        <REFERENCIA>AB990</REFERENCIA>
+
+        <NIT_EMISOR>6277755</NIT_EMISOR>
+
+        <NIT_RECEPTOR>4556870</NIT_RECEPTOR>
+
+        <VALOR>100.00</VALOR>
+
+        <IVA>12.00</IVA>
+
+        <TOTAL>112.00</TOTAL>
+
+    </DTE>
+    <DTE>
+
+        <TIEMPO>Guatemala, 15/01/2021 13:05 hrs. </TIEMPO>
+
+        <REFERENCIA>ABDD990</REFERENCIA>
+
+        <NIT_EMISOR>6277755</NIT_EMISOR>
+
+        <NIT_RECEPTOR>4556870</NIT_RECEPTOR>
+
+        <VALOR>100.00</VALOR>
+
+        <IVA>12.00</IVA>
+
+        <TOTAL>112.00</TOTAL>
+
+    </DTE>
+    <DTE>
+
+        <TIEMPO>Guatemala, 15/01/2021 13:05 hrs. </TIEMPO>
+
+        <REFERENCIA>AERB990</REFERENCIA>
+
+        <NIT_EMISOR>6277755</NIT_EMISOR>
+
+        <NIT_RECEPTOR>4556870</NIT_RECEPTOR>
+
+        <VALOR>100.00</VALOR>
+
+        <IVA>12.00</IVA>
+
+        <TOTAL>112.00</TOTAL>
+
+    </DTE>
+
+    <DTE>
+
+        <TIEMPO>Guatemala, 18/10/2021 23:15 hrs. </TIEMPO>
+
+        <REFERENCIA>ABC90</REFERENCIA>
+
+        <NIT_EMISOR>5698567</NIT_EMISOR>
+
+        <NIT_RECEPTOR>7895654</NIT_RECEPTOR>
+
+        <VALOR>100.00</VALOR>
+
+        <IVA>50.00</IVA>
+
+        <TOTAL>112.00</TOTAL>
+
+    </DTE>
+    <DTE>
+
+        <TIEMPO>Guatemala, 18/10/2021 23:15 hrs. </TIEMPO>
+
+        <REFERENCIA>RT5445</REFERENCIA>
+
+        <NIT_EMISOR>5698567</NIT_EMISOR>
+
+        <NIT_RECEPTOR>7895654</NIT_RECEPTOR>
+
+        <VALOR>100.00</VALOR>
+
+        <IVA>50.00</IVA>
+
+        <TOTAL>112.00</TOTAL>
+
+    </DTE>
+    <DTE>
+
+        <TIEMPO>Guatemala, 18/10/2021 23:15 hrs. </TIEMPO>
+
+        <REFERENCIA>JK47</REFERENCIA>
+
+        <NIT_EMISOR>5698567</NIT_EMISOR>
+
+        <NIT_RECEPTOR>7895654</NIT_RECEPTOR>
+
+        <VALOR>100.00</VALOR>
+
+        <IVA>50.00</IVA>
+
+        <TOTAL>112.00</TOTAL>
+
+    </DTE>
+
+
+</SOLICITUD_AUTORIZACION>

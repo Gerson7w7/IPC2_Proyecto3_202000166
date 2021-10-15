@@ -1,0 +1,40 @@
+.c1 {
+    background-color: #79B4B7;
+    padding: 8px;
+}
+.navbar {
+    padding: 0px;
+}
+.navbar-expand-lg .navbar-collapse {
+    display: flex!important;
+    flex-basis: auto;
+    justify-content: flex-end;
+    flex-direction: row;
+}
+.btn {
+    margin: 5px;
+}
+.d-flex {
+    display: flex!important;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.container {
+    margin-top: 70px;    
+}
+.btn {
+    background-color: #F8F0DF;
+    color: black
+}
+.btns {
+    background-color: #C6D57E;
+}
+.modal-header {
+    background-color: #7FC8A9;
+}
+.modal-footer {
+    background-color: #7FC8A9;
+}
+.modal-body {
+    background-color: #D5EEBB;
+}
