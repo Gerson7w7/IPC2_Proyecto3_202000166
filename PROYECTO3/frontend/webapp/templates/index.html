@@ -133,17 +133,61 @@
                   <div class="modal-body">
                     <div class="d-flex p-2 bd-highlight">
                       <div class="d-flex justify-content-around">
-                        <button type="button" class="btn btn-outline-primary">Consultar Datos</button>
+                        <!-- =============== CONSULTAR DATOS============= -->
+                        <form method="GET" action="">
+                          <button name="bDatos" class="btn btn-outline-primary">Consultar Datos</button>
+                        </form>
+                      </div>
+                      <!-- ================ RESUMEN IVA ============= -->
+                      <form method="get" action="iva">
+                      <div class="d-flex justify-content-around">
+                        <a class="btn btn-outline-secondary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                          Resumen IVA
+                        </a>
+                        <div class="collapse" id="collapseExample">
+                          <div class="card card-body">
+                              <label for="selector" class="form-label">Fecha:</label>
+                              <select name="selector" id="selector" class="form-select" aria-label="Default select example">
+                                {% for f in fechas %}
+                                <option value="{{ f }}">{{ f }}</option>
+                                {% endfor %}                               
+                              </select> 
+                            
+                          </div>
+                        </div>
+                      </div>
+                      <!-- ================ RESUMEN POR RANGO DE FECHAS ============= -->
+                      <div class="d-flex justify-content-around">
+                        <a class="btn btn-outline-success" data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample">
+                          Resumen Fechas
+                        </a>
+                        <div class="collapse" id="collapseExample1">
+                          <div class="card card-body">
+                              <label for="inferior" class="form-label">Rango inferior:</label>
+                              <select name="inferior" id="inferior" class="form-select" aria-label="Default select example">
+                                {% for f in fechas %}
+                                <option value="{{ f }}">{{ f }}</option>
+                                {% endfor %}                               
+                              </select> 
+                              <label for="superior" class="form-label">Rango superior:</label>
+                              <select name="superior" id="superior" class="form-select" aria-label="Default select example">
+                                {% for f in fechas %}
+                                <option value="{{ f }}">{{ f }}</option>
+                                {% endfor %}                               
+                              </select> 
+                              <label for="tipo" class="form-label">Tipo de gráfica:</label>
+                              <select name="tipo" id="tipo" class="form-select" aria-label="Default select example">
+                                <option value="con">Valor total</option>
+                                <option value="sin">Valor sin IVA</option>                               
+                              </select> 
+                            
+                          </div>
+                        </div>
                       </div>
                       <div class="d-flex justify-content-around">
-                        <button type="button" class="btn btn-outline-secondary">Resumen IVA</button>
+                        <button type="sumbit" class="btn btn-outline-info">Gráfica</button>
                       </div>
-                      <div class="d-flex justify-content-around">
-                        <button type="button" class="btn btn-outline-success">Resumen Fechas</button>
-                      </div>
-                      <div class="d-flex justify-content-around">
-                        <button type="button" class="btn btn-outline-info">Gráfica</button>
-                      </div>
+                    </form>
                       <div class="d-flex justify-content-around">
                         <button type="button" class="btn btn-outline-warning">Reporte</button>
                       </div>
@@ -228,7 +272,7 @@
       <div class="row">
         <div class="col">
           <!--================================FORM 1========================-->
-          <form method="POST"  action='enviar'>
+          <form method="POST" action='enviar'>
             {% csrf_token %}
             <div class="mb-3">
               <fieldset disabled>
@@ -242,11 +286,12 @@
         </div>
         <div class="col">
           <!--================================FORM 2========================-->
-          <form>
+          <form method="POST"  action='reset'>
+            {% csrf_token %}
             <div class="mb-3">
               <fieldset disabled>
                 <label for="exampleFormControlTextarea1" class="form-label">Lista de autorizaciones</label>
-                <textarea class="form-control" id="exampleFormControlInput2" rows="10"></textarea>
+                <textarea class="form-control" id="exampleFormControlInput2" rows="10">{{ cXml }}</textarea>
               </fieldset>
             </div>
             <button type="submit" class="btn btn-primary btns">Reset</button>

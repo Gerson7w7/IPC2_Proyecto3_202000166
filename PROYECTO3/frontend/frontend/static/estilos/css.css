@@ -16,11 +16,16 @@
 }
 .d-flex {
     display: flex!important;
+    align-content: space-around;
     flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
 }
 .container {
     margin-top: 70px;    
+}
+.row {
+    padding-left: 20px;
+    padding-right: 20px;
 }
 .btn {
     background-color: #F8F0DF;
@@ -37,4 +42,7 @@
 }
 .modal-body {
     background-color: #D5EEBB;
+}
+.card {
+    margin: 15 px;
 }

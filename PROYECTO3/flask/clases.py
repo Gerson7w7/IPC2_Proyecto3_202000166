@@ -19,9 +19,9 @@ class Error(object):
 
 
 class Fecha(object):
-    def __init__(self, fecha):
+    def __init__(self, fecha, contador):
         self.fecha = fecha
-        self.contador = 1
+        self.contador = contador
 
 class Autorizacion(object):
     def __init__(self):
