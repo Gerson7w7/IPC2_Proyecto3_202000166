@@ -1,6 +1,9 @@
+import subprocess
 from django.shortcuts import render, redirect
 import requests
 import re
+import os
+import subprocess
 
 # Create your views here.
 endpoint = 'http://localhost:5000{}'
@@ -75,6 +78,15 @@ def iva(request):
         })  # consulta a la API
 
         return render(request, 'graficas.html')
+
+
+def documento(request):
+    module_dir = os.path.dirname(__file__)  # get current directory
+    file_path = os.path.join(module_dir, '../../../DOCUMENTACION/[IPC2]ENSAYO_202000166.pdf')
+    subprocess.Popen([file_path], shell=True)
+    url = endpoint.format('/doc')  # http://localhost:5000/datos
+    requests.get(url)  # consulta a la API
+    return redirect('index')
 
 
 def regresar(request):

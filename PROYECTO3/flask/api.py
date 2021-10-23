@@ -1,6 +1,7 @@
 from flask import Flask, Response, request
 from flask_cors import CORS
 from procesos import inicioProceso, fechasHTML, graficas
+import subprocess
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origin": "*"}})

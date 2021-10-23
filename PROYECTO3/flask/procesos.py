@@ -260,7 +260,6 @@ def verificaciones(facturas, autorizaciones):
     autorizacion(facturas, autorizaciones)
 
 
-
 # verificaciones de nits
 def verificacionNIT(nit):
     inicio = len(nit) - 2
@@ -356,20 +355,14 @@ def contadores(facturas, fechas, autorizaciones):
     else:
         fechasA = []
         for autorizacion in autorizaciones:
-            print('hola 1')
-            print(autorizacion.fecha)
             fechasA.append(autorizacion.fecha)
 
         for f in fechas:
-            print('hola2')
-            print(f)
             if f in fechasA:
-                print( "============= fecha repetida")
                 for autorizacion in autorizaciones:
                     if f == autorizacion.fecha:
                         autorizacion = fechasF(facturas, autorizacion, f)
             else: 
-                print( "============= fecha nueva")
                 # creando un objeto de tipo Autorización
                 autorizacion = Autorizacion()         
                 autorizacion = fechasF(facturas, autorizacion, f)
@@ -439,8 +432,7 @@ def fechasF(facturas, autorizacion, f):
                         if a.nitEmisor != fac.nitEmisor:
                             autorizacion.emisores += 1
                         if a.nitReceptor != fac.nitReceptor:
-                            autorizacion.receptores += 1 
-            
+                            autorizacion.receptores += 1            
     return autorizacion
 
 
@@ -665,7 +657,6 @@ def databaseSalida(autorizaciones):
     archivo = open('database.xml', 'w')
     archivo.write(xmlDoc.toprettyxml())
     archivo.close() 
-
     print("Se ha escrito el archivo con éxito! :D")
 
 
@@ -712,7 +703,6 @@ def resumen1(autorizaciones, selector):
 
     # nits sin repetirse
     nits = list(set(nits))
-
     for n in nits:
         flagE = False
         flagR = False
@@ -744,7 +734,6 @@ def resumen1(autorizaciones, selector):
 def resumen2(autorizaciones, inferior, superior, tipo):
     autorizaciones = ordenar(autorizaciones)
     print('fechas autorizadas')
-    
     flag = False
     for a in autorizaciones:
         # si la fecha de la autorizacion es el límite inferior cambia a True

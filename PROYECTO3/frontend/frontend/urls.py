@@ -24,5 +24,6 @@ urlpatterns = [
     path('enviar', enviar, name='enviar'),
     path('reset', reset, name='reset'),
     path('iva', iva, name='iva'),
-    path('regresar', regresar, name='regresar')
+    path('regresar', regresar, name='regresar'),
+    path('documento', documento, name='documento')
 ]

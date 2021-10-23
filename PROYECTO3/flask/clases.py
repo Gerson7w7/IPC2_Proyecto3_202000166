@@ -33,6 +33,7 @@ class Autorizacion(object):
         self.eIva = 0
         self.eTotal = 0
         self.eReferencia = 0
+        # ------------ termina errores -------------------
         self.facCorrectas = 0
         self.emisores = 0
         self.receptores = 0
