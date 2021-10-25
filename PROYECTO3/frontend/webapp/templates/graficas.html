@@ -36,8 +36,60 @@
     </nav>
     <!--================================TERMINA NAV BAR========================-->
     <!-- ========================= FLEX ===================== -->
-    <div class="d-flex justify-content-evenly">
-        <img src='{% static "img/resumenIVA.png" %}' alt="">
-        <img src='{% static "img/resumenIVA.png" %}' alt="">
+
+    <div class="container px-4">
+      <div class="row gx-5">
+        <!-- =========== COLUMNA 1 (RESUMEN 1) ================ -->
+        <div class="container grafica">
+          <div class="col">
+            <div class="p-3 border bg-light">
+              
+             <h1>Resumen de IVA en la fecha {{ fecha }}</h1>         
+             <table class="table table-bordered table-info">
+               <tbody>                 
+                 <tr class="table-info">
+                   <td class="table-info">NIT</td>
+                   {% for n in nits %} 
+                   <td class="table-info">{{ n }}</td> 
+                   {% endfor %}
+                 </tr>     
+                 <tr class="table-info">
+                   <td class="table-info">IVA emitido</td>
+                   {% for e in ivaEmitido %} 
+                   <td class="table-info">{{ e }}</td> 
+                   {% endfor %}
+                 </tr>  
+                 <tr class="table-info">
+                   <td class="table-info">IVA recibido</td>
+                   {% for r in ivaRecibido %} 
+                   <td class="table-info">{{ r }}</td> 
+                   {% endfor %}
+                 </tr>              
+               </tbody>
+             </table>
+             <img src='{% static "img/resumenIVA.png" %}' alt="">
+            </div>
+           </div>
+        </div>
+        
+        <!-- =========== COLUMNA 2 (RESUMEN 2) ================ -->
+        <div class="col">
+          <div class="p-3 border bg-light">
+            <h1>Resumen Rango de Fechas</h1>         
+             <table class="table table-bordered table-info">
+               <tbody>                   
+                {% for m in monto %}            
+                 <tr class="table-info">                 
+                   {% for n in m  reversed%} 
+                   <td class="table-info">{{ n }}</td> 
+                   {% endfor %}        
+                 </tr> 
+                 {% endfor %}                 
+               </tbody>
+             </table>
+            <img src='{% static "img/fechas.png" %}' alt=""> 
+
+          </div>
+        </div>
+      </div>
     </div>
-    <!-- ======================TERMINA FLEX=================== -->

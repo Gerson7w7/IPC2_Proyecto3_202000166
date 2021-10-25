@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from webapp.views import *
+from django_pdfkit import PDFView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,5 +26,7 @@ urlpatterns = [
     path('reset', reset, name='reset'),
     path('iva', iva, name='iva'),
     path('regresar', regresar, name='regresar'),
-    path('documento', documento, name='documento')
+    path('documento', documento, name='documento'),
+    path('pdf', pdf, name='pdf')
 ]
+

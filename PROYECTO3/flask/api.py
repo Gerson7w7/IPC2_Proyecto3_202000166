@@ -1,7 +1,6 @@
-from flask import Flask, Response, request
+from flask import Flask, Response, request, jsonify
 from flask_cors import CORS
-from procesos import inicioProceso, fechasHTML, graficas
-import subprocess
+from procesos import inicioProceso, fechasHTML, resumen1, resumen2, crearPDF
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origin": "*"}})
@@ -37,6 +36,7 @@ def post_procesos():
     inicioProceso()
     return Response(status=204)
 
+
 @app.route('/reset', methods=['POST'])
 def reset():
     archivo = open('autorizacion.xml', 'w')
@@ -63,9 +63,18 @@ def get_graficas():
     selector = str(request.args.get('selector'))
     inferior = str(request.args.get('inferior'))
     superior = str(request.args.get('superior'))
-    tipo = str(request.args.get('tipo'))
-    graficas(selector, inferior, superior, tipo)
-    return str('holi')
+    tipo = int(request.args.get('tipo'))
+    grafica = resumen1(selector)
+    grafica = resumen2(inferior, superior, tipo, grafica)
+    crearPDF(grafica)
+
+    return jsonify(
+        fecha = grafica.fecha,
+        nits = grafica.nits,
+        ivaEmitido = grafica.ivaEmitido,
+        ivaRecibido = grafica.ivaRecibido,
+        monto = grafica.monto
+    )
 
 
 if __name__=='__main__':

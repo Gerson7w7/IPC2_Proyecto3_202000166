@@ -1,6 +1,7 @@
 import subprocess
 from django.shortcuts import render, redirect
 import requests
+import json
 import re
 import os
 import subprocess
@@ -70,22 +71,27 @@ def iva(request):
         superior = request.GET.get('superior')
         tipo = request.GET.get('tipo')
         url = endpoint.format('/grafica')  # http://localhost:5000/datos
-        requests.get(url, {
+        grafica = requests.get(url, {
             'selector': selector,
             'inferior': inferior,
             'superior': superior,
             'tipo': tipo
         })  # consulta a la API
 
-        return render(request, 'graficas.html')
+        context = json.loads(grafica.text)
+
+        return render(request, 'graficas.html', context)
 
 
 def documento(request):
     module_dir = os.path.dirname(__file__)  # get current directory
     file_path = os.path.join(module_dir, '../../../DOCUMENTACION/[IPC2]ENSAYO_202000166.pdf')
     subprocess.Popen([file_path], shell=True)
-    url = endpoint.format('/doc')  # http://localhost:5000/datos
-    requests.get(url)  # consulta a la API
+    return redirect('index')
+
+
+def pdf(request):
+    
     return redirect('index')
 
 

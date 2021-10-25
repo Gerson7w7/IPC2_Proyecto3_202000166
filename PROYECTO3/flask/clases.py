@@ -1,4 +1,3 @@
-
 class Factura(object):
     def __init__(self):
         self.fecha = ''
@@ -18,10 +17,13 @@ class Error(object):
         self.error = error
 
 
-class Fecha(object):
-    def __init__(self, fecha, contador):
+class Grafica(object):
+    def __init__(self, fecha, nits, ivaEmitido, ivaRecivido):
         self.fecha = fecha
-        self.contador = contador
+        self.nits = nits
+        self.ivaEmitido = ivaEmitido
+        self.ivaRecibido = ivaRecivido
+        self.monto = []
 
 class Autorizacion(object):
     def __init__(self):

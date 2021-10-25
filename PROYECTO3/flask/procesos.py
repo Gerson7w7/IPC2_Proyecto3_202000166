@@ -1,8 +1,10 @@
-from clases import Factura, Error, Autorizacion
+from clases import Factura, Error, Autorizacion, Grafica
 import xml.dom.minidom 
 import re
 import numpy
+import os
 from datetime import datetime
+from fpdf import FPDF
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -676,78 +678,125 @@ def fechasHTML():
         return fechas
 
 
-def graficas(selector, inferior, superior, tipo):
+def resumen1(selector):
     autorizaciones = []
     db = open('database.xml', 'r')
     data = db.read()
     if len(data) != 0:
         autorizaciones = databaseCarga(autorizaciones)
-        resumen1(autorizaciones, selector)
-        resumen2(autorizaciones, inferior, superior, tipo)
+        # Resumen de IVA por fecha y NIT
+        nits = []
+        ivaEmitido = []
+        ivaRecivido = []
+        autorizacion = None      
+
+        for a in autorizaciones:
+            if a.fecha == selector:
+                autorizacion = a
+                # guardando todos los nits
+                for fac in a.facturas:              
+                    nits.append(fac.nitEmisor)
+                    nits.append(fac.nitReceptor)
+
+        # nits sin repetirse
+        nits = list(set(nits))
+        for n in nits:
+            flagE = False
+            flagR = False
+            for fac in autorizacion.facturas:
+                if n == fac.nitEmisor:
+                    ivaEmitido.append(fac.iva)
+                    flagE = True
+                if n == fac.nitReceptor:
+                    ivaRecivido.append(fac.iva)
+                    flagR = True
+            if flagE == False:
+                ivaEmitido.append(0)
+            if flagR == False:
+                ivaRecivido.append(0)
+
+        grafica = Grafica(selector, nits, ivaEmitido, ivaRecivido)
+
+        width = 0.4
+        values = numpy.arange(len(nits))
+        plt.bar(values, ivaEmitido, width, label = 'IVA emitido')
+        plt.bar(values+width, ivaRecivido, width, label = 'IVA recibido')
+        plt.xlabel('NITS')
+        plt.ylabel('IVA')
+        plt.title(f'IVA en la fecha {selector}')
+        plt.legend()
+        plt.xticks(values, nits)
+        plt.savefig('../frontend/frontend/static/img/resumenIVA')
+        plt.close()
+        return grafica
 
 
-def resumen1(autorizaciones, selector):
-    # Resumen de IVA por fecha y NIT
-    nits = []
-    ivaEmitido = []
-    ivaRecivido = []
-    autorizacion = None      
+def resumen2(inferior, superior, tipo, grafica):
+    autorizaciones = []
+    db = open('database.xml', 'r')
+    data = db.read()
+    if len(data) != 0:
+        fechas = []
+        valores = []
+        monto = []
+        autorizaciones = databaseCarga(autorizaciones)
+        autorizaciones = ordenar(autorizaciones)
+        flag = False
+        for a in autorizaciones:
+            # si la fecha de la autorizacion es el límite inferior cambia a True
+            if a.fecha == inferior:
+                flag = True
 
-    for a in autorizaciones:
-        if a.fecha == selector:
-            autorizacion = a
-            # guardando todos los nits
-            for fac in a.facturas:              
-                nits.append(fac.nitEmisor)
-                nits.append(fac.nitReceptor)
+            # si la bandera es True empieza a agregar las autorizaciones 
+            if flag:
+                fechas.append(a.fecha)
+                # valor con iva
+                if tipo == 1:                  
+                    total = 0
+                    totales = []
+                    for f in a.facturas:
+                        total += f.total
+                        totales.append(f.total)
+                    monto.append(totales)
+                    valores.append(total)
+                # valor sin iva
+                elif tipo == 2:
+                    total = 0
+                    totales = []
+                    for f in a.facturas:
+                        total += f.valor
+                        totales.append(f.valor)
+                    monto.append(totales)
+                    valores.append(total)
 
-    # nits sin repetirse
-    nits = list(set(nits))
-    for n in nits:
-        flagE = False
-        flagR = False
-        for fac in autorizacion.facturas:
-            if n == fac.nitEmisor:
-                ivaEmitido.append(fac.iva)
-                flagE = True
-            if n == fac.nitReceptor:
-                ivaRecivido.append(fac.iva)
-                flagR = True
-        if flagE == False:
-            ivaEmitido.append(0)
-        if flagR == False:
-            ivaRecivido.append(0)
+            # si la fecha de la autorizacion es el límite superior cambia a False y termina las iteraciones
+            if a.fecha == superior:
+                flag = False
+                break
+        
+        i = 0
+        for m in monto:
+            m.append(fechas[i])
+            i += 1    
+                
+        grafica.monto = monto
 
-    width = 0.4
-    values = numpy.arange(len(nits))
-    plt.bar(values, ivaEmitido, width, label = 'IVA emitido')
-    plt.bar(values+width, ivaRecivido, width, label = 'IVA recibido')
-    plt.xlabel('NITS')
-    plt.ylabel('IVA')
-    plt.title(f'IVA en la fecha {selector}')
-    plt.legend()
-    plt.xticks(values, nits)
-    plt.savefig('../frontend/frontend/static/img/resumenIVA')
-    plt.close()
+        width = 0.4
+        values = numpy.arange(len(fechas))
+        if tipo == 1:
+            plt.bar(values, valores, width, label = 'valor con IVA')
+            plt.title(f'Valores con IVA de {inferior} al {superior}')
+        else:
+            plt.bar(values, valores, width, label = 'valor sin iva')
+            plt.title(f'Valores sin IVA de {inferior} al {superior}')
+        plt.xlabel('Fechas')
+        plt.ylabel('Valor')
+        plt.legend()
+        plt.xticks(values, fechas)
+        plt.savefig('../frontend/frontend/static/img/fechas')
+        plt.close()
 
-
-def resumen2(autorizaciones, inferior, superior, tipo):
-    autorizaciones = ordenar(autorizaciones)
-    print('fechas autorizadas')
-    flag = False
-    for a in autorizaciones:
-        # si la fecha de la autorizacion es el límite inferior cambia a True
-        if a.fecha == inferior:
-            flag = True
-
-        # si la bandera es True, agrega la fecha
-        if flag:
-            print(a.fecha)
-
-        # si la fecha de la autorizacion es el límite superior cambia a False y termina las iteraciones
-        if a.fecha == superior:
-            flag = False
-            break
+        return grafica
 
 
 # ordenando las autorizaciones por fechas
@@ -765,3 +814,47 @@ def ordenar(autorizaciones):
             if f == a.fecha:
                 aux.append(a)
     return aux
+
+
+def crearPDF(grafica):
+    pdf = FPDF(orientation='P', unit='mm', format='A4')
+    pdf.add_page()
+    pdf.set_font('Arial', '', 15)
+
+    pdf.cell(w = 32, h = 15, txt = 'RESUMEN 1', border = 0, ln = 1,align = 'C', fill = 0, center=True)
+    c = 0
+    pdf.cell(w = 32, h = 15, txt = 'NITS', border = 1, align = 'C', fill = 0)
+    for n in grafica.nits:      
+        if len(grafica.nits) == c+1:
+            pdf.multi_cell(w = 25, h = 15, txt = str(n), border = 1, align = 'C', fill = 0)      
+            pdf.ln(0)   
+        else:
+            pdf.cell(w = 25, h = 15, txt = str(n), border = 1, align = 'C', fill = 0)
+            c += 1
+    c = 0
+    pdf.cell(w = 32, h = 15, txt = 'IVA Emitido', border = 1, align = 'C', fill = 0)
+    for i in grafica.ivaEmitido:
+        if len(grafica.ivaEmitido) == c+1:
+            pdf.multi_cell(w = 25, h = 15, txt = str(i), border = 1, align = 'C', fill = 0)
+            pdf.ln(0) 
+        else:
+            pdf.cell(w = 25, h = 15, txt = str(i), border = 1, align = 'C', fill = 0)
+            c += 1
+    c = 0
+    pdf.cell(w = 32, h = 15, txt = 'IVA Recibido', border = 1, align = 'C', fill = 0)
+    for i in grafica.ivaRecibido:
+        if len(grafica.ivaRecibido) == c+1:
+            pdf.multi_cell(w = 25, h = 15, txt = str(i), border = 1, align = 'C', fill = 0)
+            pdf.ln(0) 
+        else:
+            pdf.cell(w = 25, h = 15, txt = str(i), border = 1, align = 'C', fill = 0)
+            c += 1
+        
+    module_dir = os.path.dirname(__file__)  # get current directory
+    file_path = os.path.join(module_dir, '../frontend/frontend/static/img/resumenIVA.png')
+
+    pdf.image(file_path,
+        x= 50, y= 75,
+        w = 100, h = 100)
+
+    pdf.output('reporte.pdf')

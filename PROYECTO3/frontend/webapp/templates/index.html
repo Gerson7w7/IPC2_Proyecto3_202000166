@@ -177,8 +177,8 @@
                               </select> 
                               <label for="tipo" class="form-label">Tipo de gráfica:</label>
                               <select name="tipo" id="tipo" class="form-select" aria-label="Default select example">
-                                <option value="con">Valor total</option>
-                                <option value="sin">Valor sin IVA</option>                               
+                                <option value="1">Valor total</option>
+                                <option value="2">Valor sin IVA</option>                               
                               </select> 
                             
                           </div>
@@ -189,7 +189,9 @@
                       </div>
                     </form>
                       <div class="d-flex justify-content-around">
-                        <button type="button" class="btn btn-outline-warning">Reporte</button>
+                        <form action="pdf" method="get">
+                          <button type="button" class="btn btn-outline-warning">Reporte</button>
+                        </form>
                       </div>
                     </div>
                   </div>
