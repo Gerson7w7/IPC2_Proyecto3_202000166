@@ -818,10 +818,10 @@ def ordenar(autorizaciones):
 
 def crearPDF(grafica):
     pdf = FPDF(orientation='P', unit='mm', format='A4')
+    # ==============resumen 2================
     pdf.add_page()
     pdf.set_font('Arial', '', 15)
-
-    pdf.cell(w = 32, h = 15, txt = 'RESUMEN 1', border = 0, ln = 1,align = 'C', fill = 0, center=True)
+    pdf.cell(w = 32, h = 15, txt = 'RESUMEN 1 (IVA)', border = 0, ln = 1,align = 'C', fill = 0, center=True)
     c = 0
     pdf.cell(w = 32, h = 15, txt = 'NITS', border = 1, align = 'C', fill = 0)
     for n in grafica.nits:      
@@ -854,7 +854,31 @@ def crearPDF(grafica):
     file_path = os.path.join(module_dir, '../frontend/frontend/static/img/resumenIVA.png')
 
     pdf.image(file_path,
-        x= 50, y= 75,
+        x= 50, y= 110,
         w = 100, h = 100)
+
+    # ==============resumen 2================
+    pdf.add_page()
+    pdf.cell(w = 32, h = 15, txt = 'RESUMEN 2 (RANGO DE FECHAS)', border = 0, ln = 1,align = 'C', fill = 0, center=True)
+    for m in grafica.monto:
+        c = 0
+        for n in reversed(m):      
+            if len(m) == c+1:
+                pdf.multi_cell(w = 20, h = 15, txt = str(n), border = 1, align = 'C', fill = 0)      
+                pdf.ln(0)   
+            else:
+                if type(n) != float:
+                    pdf.cell(w = 35, h = 15, txt = str(n), border = 1, align = 'C', fill = 0)
+                else:
+                    pdf.cell(w = 20, h = 15, txt = str(n), border = 1, align = 'C', fill = 0)
+                c += 1
+        
+    module_dir = os.path.dirname(__file__)  # get current directory
+    file_path = os.path.join(module_dir, '../frontend/frontend/static/img/fechas.png')
+
+    pdf.image(file_path,
+        x= 50, y= 170,
+        w = 100, h = 100)
+
 
     pdf.output('reporte.pdf')

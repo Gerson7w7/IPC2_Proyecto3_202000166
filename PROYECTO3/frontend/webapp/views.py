@@ -91,7 +91,9 @@ def documento(request):
 
 
 def pdf(request):
-    
+    module_dir = os.path.dirname(__file__)  # get current directory
+    file_path = os.path.join(module_dir, '../../flask/reporte.pdf')
+    subprocess.Popen([file_path], shell=True)
     return redirect('index')
 
 
