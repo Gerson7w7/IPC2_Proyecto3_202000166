@@ -304,6 +304,9 @@ def autorizacion(facturas, autorizaciones):
 
     for a in autorizaciones:
         fechas.append(a.fecha)
+    
+    print('FECHAS AUTORIZADAS')
+    print(fechas)
         
     for fac in facturas:
         # filtrando las facturas correctas
@@ -319,7 +322,10 @@ def autorizacion(facturas, autorizaciones):
                         flag = True
                 # si la fecha no se ha registrado, se procede a registrarla
                 if not flag:
-                    fechas.append(fac.fecha)               
+                    fechas.append(fac.fecha)    
+
+    print('FECHAS AUTORIZADAS')
+    print(fechas)           
 
     contadores(facturas, fechas, autorizaciones)
                     
